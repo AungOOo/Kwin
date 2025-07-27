@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambodia Stories - SEA Community Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <div class="toggle-container">
+                <div class="toggle-handle">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <i class="fas fa-sun sun-icon"></i>
+                <i class="fas fa-moon moon-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div>
+                    <div class="logo-text">SEA Community Support</div>
+                    <div class="tagline">Empowering Southeast Asian Communities</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <!-- Stories Dropdown Menu -->
+                    <li class="dropdown">
+                        <a href="stories.html" class="nav-link">Stories <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="stories-Cambodia.html">Cambodia</a>
+                            <a href="stories-cambodia.html">Cambodia</a>
+                            <a href="stories-philippines.html">Philippines</a>
+                            <a href="stories-indonesia.html">Indonesia</a>
+                            <a href="stories-thailand.html">Thailand</a>
+                        </div>
+                    </li>
+                    <li><a href="donate.html" class="nav-link">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Stories Page Content -->
+    <div class="page-content">
+        <div class="section section-bg2">
+            <div class="section-title">
+                <h1>Impact Stories: Cambodia</h1>
+                <p>See how your support changes lives in Cambodia</p>
+            </div>
+            
+            <!-- Container for stories -->
+            <div class="stories-grid" id="stories-container">
+                <!-- Story 1 -->
+                <div class="story-card">
+                    <div class="story-image" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')"></div>
+                    <div class="story-content">
+                        <span class="story-location">Cambodia</span>
+                        <h3 class="story-title">New School Brings Hope to Mountain Village</h3>
+                        <p class="story-desc">In a remote village in Northern Cambodia, children no longer have to walk 10km to school thanks to our new community learning center.</p>
+                        <a href="story-detail.html?id=1" class="read-more">Read More</a>
+                    </div>
+                </div>
+                
+                <!-- Story 6 -->
+                <div class="story-card">
+                    <div class="story-image" style="background-image: url('https://images.unsplash.com/photo-1582212172611-6d3d1c94f3c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')"></div>
+                    <div class="story-content">
+                        <span class="story-location">Cambodia</span>
+                        <h3 class="story-title">Healthcare Access for Ethnic Minorities</h3>
+                        <p class="story-desc">Mobile clinics now provide essential healthcare to remote ethnic communities in Cambodia's Central Highlands.</p>
+                        <a href="story-detail.html?id=6" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Dummy Story 1 for Pagination Demo -->
+                <div class="story-card">
+                    <div class="story-image" style="background-image: url('https://placehold.co/600x400/a7c957/386641?text=Cambodia+Story+3')"></div>
+                    <div class="story-content">
+                        <span class="story-location">Cambodia</span>
+                        <h3 class="story-title">New Agricultural Co-op Thrives</h3>
+                        <p class="story-desc">A new farmer's cooperative in the Mekong Delta has seen record profits after adopting new sustainable techniques.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                 <!-- Dummy Story 2 for Pagination Demo -->
+                <div class="story-card">
+                    <div class="story-image" style="background-image: url('https://placehold.co/600x400/6a994e/f2e8cf?text=Cambodia+Story+4')"></div>
+                    <div class="story-content">
+                        <span class="story-location">Cambodia</span>
+                        <h3 class="story-title">Coastal Mangrove Restoration Project</h3>
+                        <p class="story-desc">Our latest environmental project has successfully restored 50 hectares of vital mangrove forests along the coast.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container for pagination buttons -->
+            <div class="pagination-controls" id="pagination-controls"></div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>SEA Community Support</h3>
+                <p>Dedicated to empowering communities across Southeast Asia through sustainable development, education, and healthcare initiatives.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="stories.html">Stories</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> contact@seacommunity.org</li>
+                    <li><i class="fas fa-phone"></i> +84 28 3822 1234</li>
+                    <li><i class="fas fa-map-marker-alt"></i> District 1, Ho Chi Minh City, Cambodia</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 SEA Community Support. All rights reserved. | Non-Profit Registration: 123-456-789</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
