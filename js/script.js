@@ -29,6 +29,13 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
     const pageCount = Math.ceil(items.length / itemsPerPage);
     let currentPage = 1;
 
+    // FIX APPLIED HERE: The scroll-to-top action is now in a separate function
+    function handlePageChange(page) {
+        displayPage(page);
+        // This scroll action now only happens when a button is clicked
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function displayPage(page) {
         currentPage = page;
         const start = (page - 1) * itemsPerPage;
@@ -39,8 +46,6 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         });
 
         updateControls();
-        // Scroll to the top of the stories grid after changing page
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function updateControls() {
@@ -50,7 +55,7 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = '&laquo; Prev';
         prevButton.disabled = currentPage === 1;
-        prevButton.addEventListener('click', () => displayPage(currentPage - 1));
+        prevButton.addEventListener('click', () => handlePageChange(currentPage - 1));
         controlsContainer.appendChild(prevButton);
 
         // Page number buttons
@@ -60,7 +65,7 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
             if (i === currentPage) {
                 pageButton.classList.add('active');
             }
-            pageButton.addEventListener('click', () => displayPage(i));
+            pageButton.addEventListener('click', () => handlePageChange(i));
             controlsContainer.appendChild(pageButton);
         }
 
@@ -68,10 +73,11 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         const nextButton = document.createElement('button');
         nextButton.innerHTML = 'Next &raquo;';
         nextButton.disabled = currentPage === pageCount;
-        nextButton.addEventListener('click', () => displayPage(currentPage + 1));
+        nextButton.addEventListener('click', () => handlePageChange(currentPage + 1));
         controlsContainer.appendChild(nextButton);
     }
 
+    // Initial page display without scrolling
     displayPage(1);
 }
 
