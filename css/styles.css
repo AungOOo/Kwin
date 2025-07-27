@@ -238,12 +238,14 @@ nav ul {
     width: 70%;
 }
 
-/* Dropdown Menu Styles -- FIX APPLIED HERE */
+/* Dropdown Menu Styles -- NEW FIX APPLIED HERE */
 .dropdown {
     position: relative;
     display: inline-block;
     /* This padding creates an invisible "bridge" for the mouse */
     padding-bottom: 15px;
+    /* This negative margin prevents the padding from pushing down other elements */
+    margin-bottom: -15px;
 }
 
 .dropdown .nav-link {
@@ -260,8 +262,8 @@ nav ul {
     box-shadow: var(--shadow);
     z-index: 1;
     border-radius: 10px;
-    /* Removed margin-top to close the gap */
-    margin-top: 0; 
+    /* This creates the visual gap between the link and the menu */
+    margin-top: 15px; 
     border: 1px solid var(--border-color);
     overflow: hidden;
     animation: fadeIn 0.3s ease-out;
