@@ -1,41 +1,49 @@
-/* Base Styles */
+/* Base Styles - New Earthy Color Palette */
 :root {
-    --primary-green: #2e7d32;
-    --light-green: #4CAF50;
-    --dark-green: #1B5E20;
-    --yellow: #FFD600;
-    --light-yellow: #FFECB3;
+    --primary-green: #2a9d8f; /* Muted Teal */
+    --light-green: #89b0ae; /* Lighter, softer teal */
+    --dark-green: #264653; /* Deep Jungle Green / Charcoal */
+    --yellow: #e9c46a; /* Golden Ochre */
+    --light-yellow: rgba(233, 196, 106, 0.2); /* Light Ochre tint */
     --white: #ffffff;
-    --light-gray: #f8f9fa;
+    --light-gray: #f7f4eb; /* Light beige for section variation */
     --medium-gray: #e0e0e0;
-    --dark-gray: #333333;
-    --text: #333333;
-    --bg: #f8f9fa;
+    --dark-gray: #555555;
+    --text: #264653; /* Main text color */
+    --bg: #fffcf2; /* Creamy white background */
     --card-bg: #ffffff;
     --header-bg: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
     --footer-bg: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
-    --shadow: 0 8px 25px rgba(0,0,0,0.08);
-    --highlight-bg: linear-gradient(120deg, rgba(255,214,0,0.15) 0%, rgba(255,214,0,0.05) 100%);
-    --section-bg1: #f8f9fa;
-    --section-bg2: #f0f4f8;
-    --section-bg3: #e8f5e9;
-    --border-color: rgba(0, 0, 0, 0.05);
+    --shadow: 0 8px 25px rgba(38, 70, 83, 0.08);
+    --highlight-bg: rgba(233, 196, 106, 0.15);
+    --section-bg1: var(--bg);
+    --section-bg2: #f7f4eb;
+    --section-bg3: rgba(42, 157, 143, 0.05);
+    --border-color: rgba(38, 70, 83, 0.1);
 }
 
 /* Dark Theme Variables */
 [data-theme="dark"] {
-    --text: #f0f0f0;
-    --bg: #121212;
-    --card-bg: #1e1e1e;
-    --header-bg: linear-gradient(135deg, #0d3b0f 0%, #1B5E20 100%);
-    --footer-bg: linear-gradient(135deg, #0d3b0f 0%, #1B5E20 100%);
+    --primary-green: #2a9d8f;
+    --light-green: #89b0ae;
+    --dark-green: #264653;
+    --yellow: #e9c46a;
+    --light-yellow: rgba(233, 196, 106, 0.2);
+    --white: #ffffff;
+    --light-gray: #2a5a6a;
+    --medium-gray: #4a4e69;
+    --dark-gray: #bbbbbb;
+    --text: #fffcf2; /* Creamy white text */
+    --bg: #203c47; /* Dark blue-green background */
+    --card-bg: #264653; /* Darkest color for cards */
+    --header-bg: linear-gradient(135deg, #1a2f38 0%, #264653 100%);
+    --footer-bg: linear-gradient(135deg, #1a2f38 0%, #264653 100%);
     --shadow: 0 8px 25px rgba(0,0,0,0.3);
-    --highlight-bg: linear-gradient(120deg, rgba(255,214,0,0.2) 0%, rgba(255,214,0,0.1) 100%);
-    --section-bg1: #1a1a1a;
-    --section-bg2: #121212;
-    --section-bg3: #0f1e10;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --medium-gray: #333333;
+    --highlight-bg: rgba(233, 196, 106, 0.1);
+    --section-bg1: var(--card-bg);
+    --section-bg2: var(--bg);
+    --section-bg3: rgba(42, 157, 143, 0.08);
+    --border-color: rgba(255, 252, 242, 0.1);
 }
 
 * {
@@ -96,7 +104,7 @@ a {
 .toggle-container {
     width: 60px;
     height: 30px;
-    background: var(--medium-gray);
+    background: var(--dark-green);
     border-radius: 30px;
     position: relative;
     overflow: hidden;
@@ -230,6 +238,59 @@ nav ul {
     width: 70%;
 }
 
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--card-bg);
+    min-width: 160px;
+    box-shadow: var(--shadow);
+    z-index: 1;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.dropdown-content a {
+    color: var(--text);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--section-bg2);
+    color: var(--primary-green);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .nav-link {
+    color: var(--yellow);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown:hover .nav-link::after {
+    width: 70%;
+}
+
+
 /* Page Container */
 .page-content {
     min-height: calc(100vh - 200px);
@@ -327,7 +388,7 @@ nav ul {
 
 .slide-content {
     position: relative;
-    z-index: 20; /* Increased z-index to appear above slider nav */
+    z-index: 20;
     max-width: 800px;
     padding: 2rem;
     text-align: center;
@@ -371,7 +432,7 @@ nav ul {
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s;
-    z-index: 15; /* Higher than slide content */
+    z-index: 15;
 }
 
 .slider-nav:hover {
@@ -419,6 +480,7 @@ nav ul {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     background: var(--white);
+    color: var(--dark-green);
 }
 
 /* Mission Section */
@@ -437,7 +499,7 @@ nav ul {
     background: var(--highlight-bg);
     padding: 1.8rem;
     border-radius: 15px;
-    border: 1px solid rgba(56, 142, 60, 0.1);
+    border: 1px solid rgba(42, 157, 143, 0.1);
     margin: 2.5rem 0;
     font-style: italic;
     font-size: 1.2rem;
@@ -451,7 +513,7 @@ nav ul {
     top: -30px;
     left: 10px;
     font-size: 8rem;
-    color: rgba(46, 125, 50, 0.1);
+    color: rgba(42, 157, 143, 0.1);
     font-family: Georgia, serif;
     line-height: 1;
 }
@@ -478,7 +540,7 @@ nav ul {
 
 .focus-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 35px rgba(38, 70, 83, 0.1);
 }
 
 .focus-icon {
@@ -535,7 +597,7 @@ nav ul {
 
 .stat-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 30px rgba(38, 70, 83, 0.1);
 }
 
 .stat-number {
@@ -552,7 +614,7 @@ nav ul {
 
 /* Donation Section */
 .donation-section {
-    background: linear-gradient(135deg, rgba(46, 125, 50, 0.1) 0%, rgba(255, 214, 0, 0.1) 100%);
+    background: var(--section-bg3);
     border-radius: 20px;
     padding: 3rem;
     margin: 3rem 0;
@@ -583,20 +645,20 @@ nav ul {
 }
 
 .donation-option {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 2rem;
     width: 200px;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid var(--border-color);
 }
 
 .donation-option:hover, .donation-option.selected {
     transform: translateY(-5px);
     border-color: var(--yellow);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(38, 70, 83, 0.1);
 }
 
 .donation-option h3 {
@@ -619,17 +681,19 @@ nav ul {
 
 .custom-amount input {
     padding: 15px 20px;
-    border: 2px solid var(--medium-gray);
+    border: 2px solid var(--border-color);
     border-radius: 50px;
     font-size: 1.1rem;
     width: 200px;
     text-align: center;
     margin-right: 10px;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 .donate-btn {
     background: linear-gradient(135deg, var(--primary-green) 0%, var(--yellow) 100%);
-    color: var(--white);
+    color: var(--dark-green);
     border: none;
     padding: 15px 35px;
     font-size: 1.1rem;
@@ -637,12 +701,12 @@ nav ul {
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
 }
 
 .donate-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+    box-shadow: 0 8px 25px rgba(42, 157, 143, 0.4);
 }
 
 /* Footer */
@@ -772,7 +836,7 @@ footer {
 
 /* Contact Form */
 .contact-form-section {
-    background: linear-gradient(135deg, rgba(46, 125, 50, 0.05) 0%, rgba(255, 214, 0, 0.05) 100%);
+    background: var(--section-bg3);
     border-radius: 20px;
     padding: 3rem;
     margin: 3rem 0;
@@ -800,7 +864,7 @@ footer {
 .form-group textarea {
     width: 100%;
     padding: 15px;
-    border: 2px solid var(--medium-gray);
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     background: var(--card-bg);
     color: var(--text);
@@ -824,12 +888,12 @@ footer {
     transition: all 0.3s;
     display: block;
     margin: 0 auto;
-    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
 }
 
 .submit-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+    box-shadow: 0 8px 25px rgba(42, 157, 143, 0.4);
 }
 
 /* Story Detail Page */
@@ -865,7 +929,7 @@ footer {
     display: flex;
     gap: 20px;
     margin-bottom: 2rem;
-    color: var(--text);
+    color: var(--dark-gray);
     font-weight: 600;
 }
 
@@ -901,9 +965,9 @@ footer {
 .stories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 40px; /* Increased gap */
-    margin-top: 3rem; /* Increased top margin */
-    margin-bottom: 3rem; /* Added bottom margin */
+    gap: 40px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .story-card {
@@ -913,12 +977,12 @@ footer {
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
-    margin-bottom: 20px; /* Added bottom margin */
+    margin-bottom: 20px;
 }
 
 .story-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 35px rgba(38, 70, 83, 0.1);
 }
 
 .story-image {
@@ -968,6 +1032,43 @@ footer {
 .read-more:hover {
     background: var(--primary-green);
     color: var(--white);
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.pagination-controls button {
+    padding: 10px 15px;
+    border: 2px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+.pagination-controls button.active {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* About Page */
@@ -1022,7 +1123,7 @@ footer {
 
 .value-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(38, 70, 83, 0.1);
 }
 
 .value-icon {
