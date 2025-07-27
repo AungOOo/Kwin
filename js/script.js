@@ -29,14 +29,8 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
     const pageCount = Math.ceil(items.length / itemsPerPage);
     let currentPage = 1;
 
-    // FIX APPLIED HERE: The scroll-to-top action is now in a separate function
-    function handlePageChange(page) {
-        displayPage(page);
-        // This scroll action now only happens when a button is clicked
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function displayPage(page) {
+    // FINAL FIX: The displayPage function now directly controls the scroll behavior.
+    function displayPage(page, allowScroll = false) { // Default allowScroll to false
         currentPage = page;
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
@@ -46,6 +40,11 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         });
 
         updateControls();
+
+        // Only scroll if allowScroll is explicitly set to true.
+        if (allowScroll) {
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     function updateControls() {
@@ -55,7 +54,8 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = '&laquo; Prev';
         prevButton.disabled = currentPage === 1;
-        prevButton.addEventListener('click', () => handlePageChange(currentPage - 1));
+        // The event listener now calls displayPage directly with allowScroll = true
+        prevButton.addEventListener('click', () => displayPage(currentPage - 1, true));
         controlsContainer.appendChild(prevButton);
 
         // Page number buttons
@@ -65,7 +65,8 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
             if (i === currentPage) {
                 pageButton.classList.add('active');
             }
-            pageButton.addEventListener('click', () => handlePageChange(i));
+            // The event listener now calls displayPage directly with allowScroll = true
+            pageButton.addEventListener('click', () => displayPage(i, true));
             controlsContainer.appendChild(pageButton);
         }
 
@@ -73,12 +74,13 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         const nextButton = document.createElement('button');
         nextButton.innerHTML = 'Next &raquo;';
         nextButton.disabled = currentPage === pageCount;
-        nextButton.addEventListener('click', () => handlePageChange(currentPage + 1));
+        // The event listener now calls displayPage directly with allowScroll = true
+        nextButton.addEventListener('click', () => displayPage(currentPage + 1, true));
         controlsContainer.appendChild(nextButton);
     }
 
-    // Initial page display without scrolling
-    displayPage(1);
+    // Initial page display without scrolling by explicitly setting allowScroll to false.
+    displayPage(1, false);
 }
 
 
