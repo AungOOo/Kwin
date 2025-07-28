@@ -24,13 +24,21 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
     if (!container || !controlsContainer) return;
 
     const items = Array.from(container.children).filter(el => el.classList.contains('story-card'));
-    if (items.length <= itemsPerPage) return; // No pagination needed if not enough items
+    if (items.length <= itemsPerPage) {
+        if(controlsContainer) controlsContainer.style.display = 'none';
+        return; 
+    }
 
     const pageCount = Math.ceil(items.length / itemsPerPage);
     let currentPage = 1;
 
-    // FINAL FIX: The displayPage function now directly controls the scroll behavior.
-    function displayPage(page, allowScroll = false) { // Default allowScroll to false
+    function handlePageClick(newPage) {
+        if (newPage < 1 || newPage > pageCount || newPage === currentPage) return;
+        displayPage(newPage);
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function displayPage(page) {
         currentPage = page;
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
@@ -40,47 +48,35 @@ function setupPagination(containerId, controlsId, itemsPerPage) {
         });
 
         updateControls();
-
-        // Only scroll if allowScroll is explicitly set to true.
-        if (allowScroll) {
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
     }
 
     function updateControls() {
         controlsContainer.innerHTML = '';
 
-        // Prev button
         const prevButton = document.createElement('button');
         prevButton.innerHTML = '&laquo; Prev';
         prevButton.disabled = currentPage === 1;
-        // The event listener now calls displayPage directly with allowScroll = true
-        prevButton.addEventListener('click', () => displayPage(currentPage - 1, true));
+        prevButton.addEventListener('click', () => handlePageClick(currentPage - 1));
         controlsContainer.appendChild(prevButton);
 
-        // Page number buttons
         for (let i = 1; i <= pageCount; i++) {
             const pageButton = document.createElement('button');
             pageButton.innerText = i;
             if (i === currentPage) {
                 pageButton.classList.add('active');
             }
-            // The event listener now calls displayPage directly with allowScroll = true
-            pageButton.addEventListener('click', () => displayPage(i, true));
+            pageButton.addEventListener('click', () => handlePageClick(i));
             controlsContainer.appendChild(pageButton);
         }
 
-        // Next button
         const nextButton = document.createElement('button');
         nextButton.innerHTML = 'Next &raquo;';
         nextButton.disabled = currentPage === pageCount;
-        // The event listener now calls displayPage directly with allowScroll = true
-        nextButton.addEventListener('click', () => displayPage(currentPage + 1, true));
+        nextButton.addEventListener('click', () => handlePageClick(currentPage + 1));
         controlsContainer.appendChild(nextButton);
     }
 
-    // Initial page display without scrolling by explicitly setting allowScroll to false.
-    displayPage(1, false);
+    displayPage(1);
 }
 
 
@@ -92,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
         
-        // Set initial toggle position
         if (savedTheme === 'dark') {
             if (toggleHandle) {
                 toggleHandle.style.left = '33px';
@@ -101,13 +96,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Set active navigation link
     const currentPage = window.location.pathname.split('/').pop();
     const navLinks = document.querySelectorAll('nav .nav-link');
     
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
-        // If it's a stories page (main, country, or detail), highlight the main "Stories" dropdown link
         if (currentPage.startsWith('stories') && link.closest('.dropdown')) {
             link.classList.add('active');
         } else if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
@@ -115,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Home page specific functionality: Hero Slider
     const sliderContainer = document.querySelector('.hero-slider');
     if (sliderContainer) {
         const slides = sliderContainer.querySelectorAll('.slide');
@@ -130,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
             function showSlide(n) {
                 slides.forEach(slide => slide.classList.remove('active'));
                 dots.forEach(dot => dot.classList.remove('active'));
-
                 currentSlide = (n + slides.length) % slides.length;
                 slides[currentSlide].classList.add('active');
                 dots[currentSlide].classList.add('active');
@@ -151,11 +142,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 dot.addEventListener('click', () => { showSlide(index); resetInterval(); });
             });
 
-            showSlide(0); // Initialize first slide
+            showSlide(0);
         }
     }
 
-    // Donation page specific functionality
     if (document.querySelector('.donation-option')) {
         const donationOptions = document.querySelectorAll('.donation-option');
         donationOptions.forEach(option => {
@@ -166,12 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Contact form functionality
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            // A non-blocking notification is better than alert()
             const submitBtn = contactForm.querySelector('.submit-btn');
             submitBtn.innerText = 'Thank you!';
             setTimeout(() => {
@@ -181,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Story detail page functionality
     if (document.getElementById('detail-title')) {
         const urlParams = new URLSearchParams(window.location.search);
         const storyId = urlParams.get('id');
@@ -191,13 +178,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Country-specific stories page pagination
     if (document.getElementById('stories-container') && document.getElementById('pagination-controls')) {
-        // Set items per page to 3
-        setupPagination('stories-container', 'pagination-controls', 3);
+        setupPagination('stories-container', 'pagination-controls', 4);
     }
     
-    // Initialize animations on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -213,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Scroll to top functionality
     const scrollTopBtn = document.querySelector('.scroll-top');
     if (scrollTopBtn) {
         window.addEventListener('scroll', () => {
@@ -231,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Story detail loading function
 function loadStory(storyId) {
-    // This data would ideally come from a database or a JSON file
     const stories = {
         "1": {
             title: "New School Brings Hope to Mountain Village",
@@ -285,7 +267,6 @@ function loadStory(storyId) {
         document.getElementById('detail-image').style.backgroundImage = `url('${story.image}')`;
         document.getElementById('detail-body').innerHTML = story.body;
     } else {
-        // Handle case where story is not found
         document.getElementById('detail-title').textContent = "Story Not Found";
         document.getElementById('detail-body').innerHTML = "<p>The story you are looking for does not exist. Please return to the stories page.</p>";
     }
