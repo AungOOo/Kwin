@@ -46,6 +46,13 @@
     --border-color: rgba(255, 252, 242, 0.1);
 }
 
+/* FIX: Dark mode visibility for story location */
+[data-theme="dark"] .story-location {
+    background: var(--yellow);
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -238,13 +245,12 @@ nav ul {
     width: 70%;
 }
 
-/* Dropdown Menu Styles -- FINAL FIX */
+/* Dropdown Menu Styles */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* This pseudo-element creates the invisible bridge and restores alignment */
 .dropdown::after {
     content: '';
     position: absolute;
@@ -269,7 +275,6 @@ nav ul {
     box-shadow: var(--shadow);
     z-index: 1;
     border-radius: 10px;
-    /* This creates the visual gap, the ::after element handles the functional gap */
     margin-top: 15px; 
     border: 1px solid var(--border-color);
     overflow: hidden;
